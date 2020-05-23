@@ -52,6 +52,16 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="rubicure\.git" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="rubicure\.github\workflows\" />
+    <Folder Include="rubicure\config\girls\" />
+    <Folder Include="rubicure\examples\" />
+    <Folder Include="rubicure\lib\rubicure\concerns\" />
+    <Folder Include="rubicure\spec\config\" />
+    <Folder Include="rubicure\spec\rubicure\concerns\" />
+    <Folder Include="rubicure\spec\support\util\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
