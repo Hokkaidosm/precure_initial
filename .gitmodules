@@ -1,0 +1,3 @@
+[submodule "rubicure"]
+	path = rubicure
+	url = https://github.com/sue445/rubicure.git
