@@ -15,6 +15,24 @@ namespace precure_initial
         static readonly string rubicureConfigPath = "../../rubicure/config/";
 
         /// <summary>
+        /// キュアアースのキー
+        /// TODO：rubicureに入ったら消す
+        /// </summary>
+        static readonly string earthKey = "cure_earth";
+
+        /// <summary>
+        /// キュアアースの名前
+        /// TODO：rubicureに入ったら消す
+        /// </summary>
+        static readonly string earthName = "キュアアース";
+
+        /// <summary>
+        /// キュアアースのシリーズキー
+        /// TODO：rubicureに入ったら消す
+        /// </summary>
+        static readonly string earthSeriesKey = "healingood";
+
+        /// <summary>
         /// シリーズデータ.
         /// </summary>
         class Series
@@ -92,6 +110,15 @@ namespace precure_initial
                     PrecureKeys = precures
                 });
             }
+            // キュアアース対応 start
+            if (series_directory.TryGetValue(earthSeriesKey, out Series healingood))
+            {
+                if (!healingood.PrecureKeys.Contains(earthKey))
+                {
+                    healingood.PrecureKeys.Add(earthKey);
+                }
+            }
+            // キュアアース対応 end
             return series_directory;
         }
 
@@ -130,6 +157,19 @@ namespace precure_initial
                     });
                 }
             }
+            // キュアアース対応 start
+            if (!precures.ContainsKey(earthKey))
+            {
+                string girlName = ToPascal(earthKey);
+                string initial = girlName.Replace("Cure ", "").Substring(0, 1);
+                precures.Add(earthKey, new Precure
+                {
+                    GirlName = girlName,
+                    PrecureName = earthName,
+                    Initial = initial
+                });
+            }
+            // キュアアース対応 end
             return precures;
         }
 
