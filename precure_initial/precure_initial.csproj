@@ -79,6 +79,7 @@
     <None Include="rubicure\config\girls\017_healingood.yml" />
     <None Include="rubicure\config\girls\018_tropical_rouge.yml" />
     <None Include="rubicure\config\girls\019_delicious_party.yml" />
+    <None Include="rubicure\config\girls\020_hirogaru_sky.yml" />
     <None Include="rubicure\config\girls\movie.yml" />
     <None Include="rubicure\config\movies.yml" />
     <None Include="rubicure\config\series.yml" />
