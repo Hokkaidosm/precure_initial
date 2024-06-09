@@ -55,9 +55,12 @@ namespace precure_initial
         {
             Dictionary<string, Series> seriesList = LoadSeries();
             Dictionary<string, Precure> precureList = LoadPrecures();
-            foreach (var series in seriesList)
+            foreach (var precure in precureList)
             {
-                OutputPrecureList(series.Value.Name, series.Value.PrecureKeys, precureList);
+                Console.WriteLine($"プリキュアキー：{precure.Key}");
+                Console.WriteLine($"プリキュア名：{precure.Value.PrecureName} / {precure.Value.GirlName}");
+                Console.WriteLine($"頭文字：{precure.Value.Initial}");
+                Console.WriteLine();
             }
         }
 
@@ -123,7 +126,8 @@ namespace precure_initial
                     }
                     girlName = ToPascal(girlName);
                     string initial = girlName.Replace("Cure ", "").Substring(0, 1);
-                    precures.Add(girl.Key, new Precure {
+                    precures.Add(girl.Key, new Precure
+                    {
                         GirlName = girlName,
                         PrecureName = precureName,
                         Initial = initial
@@ -131,39 +135,6 @@ namespace precure_initial
                 }
             }
             return precures;
-        }
-
-        /// <summary>
-        /// プリキュアリストを出力する.
-        /// </summary>
-        /// <param name="seriesName">シリーズ名</param>
-        /// <param name="precures">シリーズプリキュアキーリスト</param>
-        /// <param name="precureList">プリキュアリスト</param>
-        static void OutputPrecureList(string seriesName, List<string> precures, Dictionary<string, Precure> precureList)
-        {
-            Console.WriteLine(seriesName);
-            Console.WriteLine("プリキュア名,英語,頭文字");
-            // イニシャルリスト
-            List<string> precureInitials = new List<string>();
-            // イニシャル重複チェック
-            bool initialsConflict = false;
-            foreach (var precureKey in precures)
-            {
-                if (!precureList.TryGetValue(precureKey, out Precure precure))
-                {
-                    // 万が一取得できなかった場合はスキップする
-                    continue;
-                }
-                if (precureInitials.Contains(precure.Initial))
-                {
-                    initialsConflict = true;
-                }
-                precureInitials.Add(precure.Initial);
-                Console.WriteLine($"{precure.PrecureName},{precure.GirlName},{precure.Initial}");
-            }
-            Console.WriteLine($"人数：{precureInitials.Count}");
-            Console.WriteLine($"かぶり：{(initialsConflict ? "あり" : "なし")}");
-            Console.WriteLine();
         }
 
         /// <summary>
