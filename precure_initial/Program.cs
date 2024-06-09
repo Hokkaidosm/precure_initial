@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using YamlDotNet.Serialization;
@@ -55,9 +56,27 @@ namespace precure_initial
         {
             Dictionary<string, Series> seriesList = LoadSeries();
             Dictionary<string, Precure> precureList = LoadPrecures();
+            // TVシリーズ出演者のみに絞り込む
+            List<Precure> tvSeriesPrecureList = new List<Precure>();
+            List<string> tvSeriesPrecureKeyList = new List<string>();
             foreach (var series in seriesList)
             {
-                OutputPrecureList(series.Value.Name, series.Value.PrecureKeys, precureList);
+                tvSeriesPrecureKeyList.AddRange(series.Value.PrecureKeys);
+            }
+            foreach (var key in tvSeriesPrecureKeyList.Distinct())
+            {
+                if (precureList.TryGetValue(key, out Precure precure))
+                {
+                    tvSeriesPrecureList.Add(precure);
+                }
+            }
+            var groupedByInitialList = tvSeriesPrecureList.GroupBy(p => p.Initial).OrderByDescending(p => p.Count());
+            // 順位は後で追加します
+            Console.WriteLine("イニシャル|使用回数|プリキュア名");
+            foreach (var i in groupedByInitialList)
+            {
+                Console.Write(i.Key + "|" + i.Count() + "|");
+                Console.WriteLine(string.Join(", ", i.Select(p => p.PrecureName)));
             }
         }
 
