@@ -55,13 +55,15 @@ namespace precure_initial
         static void Main(string[] args)
         {
             Dictionary<string, Series> seriesList = LoadSeries();
+            // 直近5作品に絞り込む
+            var last5SeriesList = seriesList.Values.ToList().GetRange(seriesList.Values.Count - 5, 5);
             Dictionary<string, Precure> precureList = LoadPrecures();
             // TVシリーズ出演者のみに絞り込む
             List<Precure> tvSeriesPrecureList = new List<Precure>();
             List<string> tvSeriesPrecureKeyList = new List<string>();
-            foreach (var series in seriesList)
+            foreach (var series in last5SeriesList)
             {
-                tvSeriesPrecureKeyList.AddRange(series.Value.PrecureKeys);
+                tvSeriesPrecureKeyList.AddRange(series.PrecureKeys);
             }
             foreach (var key in tvSeriesPrecureKeyList.Distinct())
             {
