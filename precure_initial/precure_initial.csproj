@@ -81,6 +81,7 @@
     <None Include="rubicure\config\girls\019_delicious_party.yml" />
     <None Include="rubicure\config\girls\020_hirogaru_sky.yml" />
     <None Include="rubicure\config\girls\021_wonderful.yml" />
+    <None Include="rubicure\config\girls\022_you_and_idol.yml" />
     <None Include="rubicure\config\girls\movie.yml" />
     <None Include="rubicure\config\movies.yml" />
     <None Include="rubicure\config\series.yml" />
